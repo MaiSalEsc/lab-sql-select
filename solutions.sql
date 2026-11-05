@@ -37,12 +37,14 @@ SELECT
 	au.au_id AS [AUTHOR ID]
 	, au.au_lname AS [LAST NAME]
 	, au.au_fname AS [FIRST NAME]
-	, COUNT(DISTINCT tl.title_id) AS [TOTAL]
+	, SUM(sl.qty) AS [TOTAL]
 FROM authors au
 LEFT JOIN titleauthor AS ta
 	ON au.au_id = ta.au_id
 LEFT JOIN titles AS tl
 	ON ta.title_id = tl.title_id
+LEFT JOIN sales AS sl
+	ON ta.title_id = sl.title_id
 GROUP BY au.au_id, au.au_lname, au.au_fname
 ORDER BY [TOTAL] DESC
 LIMIT 3;
@@ -52,11 +54,13 @@ SELECT
 	au.au_id AS [AUTHOR ID]
 	, au.au_lname AS [LAST NAME]
 	, au.au_fname AS [FIRST NAME]
-	, COUNT(DISTINCT tl.title_id) AS [TOTAL]
+	, SUM(sl.qty) AS [TOTAL]
 FROM authors au
 LEFT JOIN titleauthor AS ta
 	ON au.au_id = ta.au_id
 LEFT JOIN titles AS tl
 	ON ta.title_id = tl.title_id
+LEFT JOIN sales AS sl
+	ON ta.title_id = sl.title_id
 GROUP BY au.au_id, au.au_lname, au.au_fname
 ORDER BY [TOTAL] DESC;
