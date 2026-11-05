@@ -37,7 +37,7 @@ SELECT
 	au.au_id AS [AUTHOR ID]
 	, au.au_lname AS [LAST NAME]
 	, au.au_fname AS [FIRST NAME]
-	, SUM(sl.qty) AS [TOTAL]
+	, SUM(IFNULL(sl.qty, 0)) AS [TOTAL]
 FROM authors au
 LEFT JOIN titleauthor AS ta
 	ON au.au_id = ta.au_id
@@ -54,7 +54,7 @@ SELECT
 	au.au_id AS [AUTHOR ID]
 	, au.au_lname AS [LAST NAME]
 	, au.au_fname AS [FIRST NAME]
-	, SUM(sl.qty) AS [TOTAL]
+	, SUM(IFNULL(sl.qty, 0)) AS [TOTAL]
 FROM authors au
 LEFT JOIN titleauthor AS ta
 	ON au.au_id = ta.au_id
